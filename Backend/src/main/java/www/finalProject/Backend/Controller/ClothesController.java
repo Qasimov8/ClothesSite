@@ -38,7 +38,7 @@ public List<ClothesEntity> search(@RequestParam String keyword){
 public void create(@RequestBody ClothesEntity clothesEntity) {
 	clothesService.createClothes(clothesEntity);
 }
-@DeleteMapping("/{id}")
+@DeleteMapping("/delete/{id}")
 public void delete(@PathVariable Long id) {
 	clothesService.deleteClothes(id);
 }
