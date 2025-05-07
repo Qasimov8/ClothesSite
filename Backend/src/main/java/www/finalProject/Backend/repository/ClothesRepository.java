@@ -13,5 +13,5 @@ List <ClothesEntity> findByOwnerId(Long OwnerId);
 List<ClothesEntity> findAllByOrderByPriceAsc();
 List <ClothesEntity> findAllByOrderByPriceDesc();
 List<ClothesEntity> findByBrandContainingIgnoreCase(String brand);
-
+List <ClothesEntity> findAllByRatingGreaterThanEqual(int minRating);
 }

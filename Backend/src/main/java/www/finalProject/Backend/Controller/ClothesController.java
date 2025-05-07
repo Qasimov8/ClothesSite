@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,24 @@ public void create(@RequestBody ClothesEntity clothesEntity) {
 public void delete(@PathVariable Long id) {
 	clothesService.deleteClothes(id);
 }
-
+@GetMapping("/rating")
+public List<ClothesEntity> byRating(@RequestParam int minRating){
+	return clothesService.findByMinRate(minRating);
+}
+@DeleteMapping("deleteAll")
+public void deleteAll() {
+	clothesService.deleteAllClothes();
+}
+@GetMapping("sortByPrice-desc")
+public List<ClothesEntity> sortByPriceDesc(){
+	return clothesService.sortByPriceDesc();
+}
+@GetMapping("sortByPrice-asc")
+public List<ClothesEntity> sortByPriceAsc(){
+	return clothesService.sortByPriceAsc();
+}
+@PutMapping("/update/{id}")
+public void upd(@PathVariable Long id, @RequestBody ClothesEntity clothes) {
+	clothesService.updateClothes(id, clothes);
+}
 }

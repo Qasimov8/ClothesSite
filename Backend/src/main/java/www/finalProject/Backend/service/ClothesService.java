@@ -29,4 +29,36 @@ public Optional<ClothesEntity> getClothesById(Long id){
 public List<ClothesEntity> search(String keyword){
 	return clothesRepository.findByBrandContainingIgnoreCase(keyword);
 }
+public List<ClothesEntity> findByMinRate(int minRating){
+	return clothesRepository.findAllByRatingGreaterThanEqual(minRating);
 }
+public void deleteAllClothes() {
+    clothesRepository.deleteAll();
+}
+public List<ClothesEntity> sortByPriceDesc(){
+	return clothesRepository.findAllByOrderByPriceDesc();
+}
+public List<ClothesEntity> sortByPriceAsc(){
+	return clothesRepository.findAllByOrderByPriceAsc();
+}
+public void updateClothes(Long id, ClothesEntity clothesEntity) {
+    Optional<ClothesEntity> oldClothes = clothesRepository.findById(id);
+    if (oldClothes.isPresent()) {
+        ClothesEntity clothes = oldClothes.get();
+
+        clothes.setBrand(clothesEntity.getBrand());
+        clothes.setType(clothesEntity.getType());
+        clothes.setCategory(clothesEntity.getCategory());
+        clothes.setDescription(clothesEntity.getDescription());
+        clothes.setPrice(clothesEntity.getPrice());
+        clothes.setRating(clothesEntity.getRating());
+        clothes.setImgUrl(clothesEntity.getImgUrl());
+        clothes.setOwnerId(clothesEntity.getownerId());
+
+        clothesRepository.save(clothes);
+    }
+}
+
+}
+
+
